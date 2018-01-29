@@ -7,6 +7,8 @@ const MIN_DELTA = 6;
 const BALLS_PER_LEVEL = 3;
 const OBSTACLE_HTML = '<circle id="obstacle" class="obstacle" cx="{{posX}}" cy="{{posY}}" r="{{radius}}" stroke="red" stroke-width="3" fill="red" />'
 const INITIAL_HTML = '<rect id="background"/> <rect class="tile" id="finish" x="0" y="0"/> <rect class="tile" id="start" x="650" y="650"/> <circle id="obstacle" class="obstacle" cx="50" cy="80" r="40" stroke="red" stroke-width="3" fill="red" />'
+const WIN_AUDIO_FILE = 'http://www.wavsource.com/snds_2018-01-14_3453803176249356/tv/simpsons/homer/award.wav'
+const LOSE_AUDIO_FILE = 'http://www.wavsource.com/snds_2018-01-14_3453803176249356/tv/simpsons/homer/doh1_y.wav'
 
 let gameState = GAME_IN_PROGRESS;
 let obstacleElements = document.getElementsByClassName('obstacle');
@@ -16,6 +18,8 @@ let timerFunction = setInterval(moveBall, 20);
 let canvas = document.getElementById('canvas');
 let levelTittle = document.getElementById('level-tittle')
 let currentLevel = 1;
+let winAudio = new Audio(WIN_AUDIO_FILE);
+let loseAudio = new Audio(LOSE_AUDIO_FILE);
 
 updateElements();
 
@@ -23,6 +27,7 @@ updateElements();
 function youLose() {
   if(gameState === GAME_IN_PROGRESS) {
     endAnimation();
+    loseAudio.play();
     alert("You Lose");
     gameState = GAME_LOST;
   }
@@ -38,6 +43,7 @@ function youWon() {
     endAnimation();
     currentLevel++;
     levelTittle.innerText = "Level " + currentLevel;
+    winAudio.play();
     alert("You Won");
     gameState = GAME_WON;
   }
