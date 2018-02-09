@@ -19,6 +19,7 @@ class HuffmanEncoding {
   public:
     HuffmanEncoding(int m[DIMENTION][DIMENTION]);
     std::vector<std::pair<int,int> > getHuffmanEncoding() const;
+    void decode(std::vector<std::pair<int,int> > v, int m[DIMENTION][DIMENTION]);
 };
 
 std::ostream& operator<<(std::ostream& os, const HuffmanEncoding& huff);

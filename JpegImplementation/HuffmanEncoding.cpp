@@ -95,3 +95,21 @@ void HuffmanEncoding::constructJthPath(int jPath[]) {
     jLimit += 2;
   }
 }
+
+void HuffmanEncoding::decode(std::vector<std::pair<int,int> > v, int m[DIMENTION][DIMENTION]) {
+  int iIdxs[DIMENTION * DIMENTION];
+  int jIdxs[DIMENTION * DIMENTION];
+  constructIthPath(iIdxs);
+  constructJthPath(jIdxs);
+  int idx = 0;
+  for(int k = 0; k < v.size(); ++k) {
+    int i = iIdxs[idx], j = jIdxs[idx];
+    for(int l = 0; l < v[k].first; ++l) {
+      m[i][j] = 0;
+      ++idx;
+      i = iIdxs[idx], j = jIdxs[idx];
+    }
+    m[i][j] = v[k].second;
+    ++idx;
+  }
+}
