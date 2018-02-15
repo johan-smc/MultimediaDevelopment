@@ -6,6 +6,8 @@
 #include "DCTII.hpp"
 #include "DCTIII.hpp"
 
+#include <cstring>
+
 using namespace std;
 
 class JPEG {

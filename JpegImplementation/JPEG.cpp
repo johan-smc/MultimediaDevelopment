@@ -63,6 +63,7 @@ void JPEG::multByQuant(int m[DIMENTION][DIMENTION]) {
 }
 
 void JPEG::decode(std::vector<std::pair<int,int> > huff, int m[DIMENTION][DIMENTION]) {
+  //memset(m, 0, sizeof m);
   HuffmanDecoding huffDec(huff, m);
   multByQuant(m);
   DCTIII dct3(m);

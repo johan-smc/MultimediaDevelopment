@@ -19,6 +19,7 @@ int picture[DIMENTION][DIMENTION];
   }
 
   int p[DIMENTION][DIMENTION];
+  memset(p, 0, sizeof p);
   cout << endl << "Huffman Encoding: " << endl;
   JPEG jpeg(picture);
   jpeg.decode(jpeg.getHuffmanEncoding(), p);

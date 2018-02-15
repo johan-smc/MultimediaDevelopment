@@ -5,6 +5,7 @@
 
 #include "HuffmanEncoding.hpp"
 #include <cmath>
+#include <cstdio>
 
 class DCTIII {
   double M[DIMENTION][DIMENTION]; // DCTII Matrix
