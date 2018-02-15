@@ -6,13 +6,19 @@ JPEG::JPEG(int m[DIMENTION][DIMENTION]) {
   generateQuantized(transformed);
   HuffmanEncoding huff(Q);
   huffEncoding = huff.getHuffmanEncoding();
+  cout << endl << "Huffman Encoding: " << endl;
   std::cout << huff << '\n';
 }
 
 void JPEG::generateQuantized(DCTII &t) {
-  for(int i = 0; i < DIMENTION; i++)
-    for(int j = 0; j < DIMENTION; j++)
+  cout << endl << "Divide By Quantized: " << endl;
+  for(int i = 0; i < DIMENTION; i++) {
+    for(int j = 0; j < DIMENTION; j++) {
       Q[i][j] = t.getT(i, j) / getQuantization(i, j);
+      cout << Q[i][j] << " ";
+    }
+    cout << endl;
+  }
 }
 
 void JPEG::printQ() {
@@ -57,17 +63,26 @@ void JPEG::multByQuant(int m[DIMENTION][DIMENTION]) {
                                   {51, 60, 69, 80, 103, 113, 120, 103},
                                   {61, 55, 56, 62, 77, 92, 101, 99}
                                 };
-  for(int i = 0; i < DIMENTION; ++i)
-    for(int j = 0; j < DIMENTION; ++j)
+  cout << endl << "Multiply By Quantized: " << endl;
+  for(int i = 0; i < DIMENTION; ++i) {
+    for(int j = 0; j < DIMENTION; ++j){
       m[i][j] *= QUANTIZATION[i][j];
+      cout << m[i][j] << " ";
+    }
+    cout << endl;
+  }
 }
 
 void JPEG::decode(std::vector<std::pair<int,int> > huff, int m[DIMENTION][DIMENTION]) {
-  //memset(m, 0, sizeof m);
   HuffmanDecoding huffDec(huff, m);
   multByQuant(m);
   DCTIII dct3(m);
-  for(int i = 0; i < DIMENTION; ++i)
-    for(int j = 0; j < DIMENTION; ++j)
+  cout << endl << "Inversa DCTII (Sin sumar 128): " << endl;
+  for(int i = 0; i < DIMENTION; ++i) {
+    for(int j = 0; j < DIMENTION; ++j) {
       m[i][j] = dct3.getT(i, j);
+      cout << m[i][j] - 128.0 << " ";
+    }
+    cout << endl;
+  }
 }
